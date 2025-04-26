@@ -15,17 +15,36 @@ const LoginPage = () => {
         username,
         password
       });
-      localStorage.setItem('token', res.data.jwt);
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('role', res.data.role); 
       navigate('/dashboard');
     } catch (err) {
       alert('Login failed: Invalid username or password');
     }
   };
 
+  //Front-end Validation
+  /*const handleLogin = async (e) => {
+    e.preventDefault();
+  
+    const validUsername = 'user';
+    const validPassword = 'password';
+  
+    if (username === validUsername && password === validPassword) {
+      const fakeJwt = 'mock-jwt-token-12345';
+      localStorage.setItem('token', fakeJwt);
+      localStorage.setItem('role', 'user'); 
+      navigate('/dashboard');
+    } else {
+      alert('Login failed: Invalid username or password');
+    }
+  };*/
+  
+
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleLogin}>
-        <h2>Netflix Login</h2>
+        <h2>ShowTime Login</h2>
         <input
           type="text"
           placeholder="Username"
