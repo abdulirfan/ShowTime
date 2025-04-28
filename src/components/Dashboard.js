@@ -47,8 +47,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.get(`http://localhost:8080/videos/${id}`, {
-        //headers: { Authorization: `Bearer ${token}` }
-        withCredentials: true
+        headers: { Authorization: `Bearer ${token}` }
       });
       alert(`Playing video: ${response.data.title}`);
     } catch (error) {
