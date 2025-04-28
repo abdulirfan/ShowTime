@@ -8,7 +8,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  /*const handleLogin = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post('http://localhost:8080/auth/login', {
@@ -16,30 +16,30 @@ const LoginPage = () => {
         password,
         withCredentials: true,
       });
-      localStorage.setItem('token', res.data.token);
-      //localStorage.setItem('role', res.data.role); 
+      localStorage.setItem('token', res.data.jwtToken);
+      localStorage.setItem('role', res.data.roles[0]); 
       navigate('/dashboard');
     } catch (err) {
       alert('Login failed: Invalid username or password');
     }
-  };*/
+  };
 
   //Front-end Validation
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
   
-    const validUsername = 'admin';
-    const validPassword = 'password';
+  //   const validUsername = 'admin';
+  //   const validPassword = 'password';
   
-    if (username === validUsername && password === validPassword) {
-      const fakeJwt = 'mock-jwt-token-12345';
-      localStorage.setItem('token', fakeJwt);
-      localStorage.setItem('role', 'admin'); 
-      navigate('/dashboard');
-    } else {
-      alert('Login failed: Invalid username or password');
-    }
-  };
+  //   if (username === validUsername && password === validPassword) {
+  //     const fakeJwt = 'mock-jwt-token-12345';
+  //     localStorage.setItem('token', fakeJwt);
+  //     localStorage.setItem('role', 'admin'); 
+  //     navigate('/dashboard');
+  //   } else {
+  //     alert('Login failed: Invalid username or password');
+  //   }
+  // };
   
 
   return (

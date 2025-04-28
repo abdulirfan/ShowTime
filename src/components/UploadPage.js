@@ -13,12 +13,11 @@ const UploadPage = () => {
     formData.append('description', description);
 
     const token = localStorage.getItem('token');
-    await axios.post('http://localhost:8080/upload', formData, {
-      /*headers: {
+    await axios.post('http://localhost:8080/admin/upload', formData, {
+      headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data'
-      }*/
-        withCredentials: true
+      }
     });
 
     alert('Upload successful!');

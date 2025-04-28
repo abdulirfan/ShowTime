@@ -45,7 +45,7 @@ const Navbar = () => {
       </form>
 
       <div style={{ display: 'flex', gap: '1rem' }}>
-        {role === 'admin' && (
+        {role === 'ROLE_ADMIN' && (
           <button
             onClick={() => navigate('/upload')}
             style={{ background: '#444', color: 'white', border: 'none', padding: '0.5rem' }}
