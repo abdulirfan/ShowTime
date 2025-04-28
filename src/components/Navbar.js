@@ -28,9 +28,10 @@ const Navbar = () => {
 
   return (
     <nav style={{ position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 1000, padding: '0.5rem 1rem', background: '#111', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.9rem', height: '50px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.6)', borderBottom: '1px solid white' }}>
-      <h3 style={{ cursor: 'pointer' }} onClick={() => navigate('/dashboard')}>
-        ShowTime
-      </h3>
+      <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={() => navigate('/dashboard')}>
+        <img src="Showtime.png" alt="ShowTime Logo" style={{ width: '30px', height: 'auto', marginRight: '10px' }} />
+        <h3>ShowTime</h3>
+      </div>
 
       <form onSubmit={handleSearch} style={{ display: 'flex', gap: '0.5rem' }}>
         <input

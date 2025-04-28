@@ -8,43 +8,47 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  /*const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8080/authenticate', {
+      const res = await axios.post('http://localhost:8080/auth/login', {
         username,
-        password
+        password,
+        withCredentials: true,
       });
       localStorage.setItem('token', res.data.token);
-      localStorage.setItem('role', res.data.role); 
+      //localStorage.setItem('role', res.data.role); 
       navigate('/dashboard');
     } catch (err) {
       alert('Login failed: Invalid username or password');
     }
-  };
+  };*/
 
   //Front-end Validation
-  /*const handleLogin = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
   
-    const validUsername = 'user';
+    const validUsername = 'admin';
     const validPassword = 'password';
   
     if (username === validUsername && password === validPassword) {
       const fakeJwt = 'mock-jwt-token-12345';
       localStorage.setItem('token', fakeJwt);
-      localStorage.setItem('role', 'user'); 
+      localStorage.setItem('role', 'admin'); 
       navigate('/dashboard');
     } else {
       alert('Login failed: Invalid username or password');
     }
-  };*/
+  };
   
 
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleLogin}>
-        <h2>ShowTime Login</h2>
+      <div className="logo-container" align="center">
+      <img src="ShowTime.png" alt="ShowTime Logo" className="logo" style={{ width: '250px' }} />
+      </div>
+        <h2 style={{ textAlign: 'center' }}>Login</h2>
         <input
           type="text"
           placeholder="Username"
