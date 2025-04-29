@@ -45,7 +45,8 @@ const UploadPage = () => {
     setThumbnail(null);
     setThumbnailSource('');
 
-    navigate('/video-player'); 
+    const videoId = response.data.videoId;
+    navigate(`/video-player/${videoId}`);
   };
 
   const handleCaptureThumbnail = () => {
