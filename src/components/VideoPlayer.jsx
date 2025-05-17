@@ -1,47 +1,30 @@
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
-import Hls from "hls.js";
 import "video.js/dist/video-js.css";
-import toast from "react-hot-toast";
 
 function VideoPlayer({ videoId }) {
     const videoRef = useRef(null);
     const playerRef = useRef(null);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        const videoUrl = `http://localhost:8080/stream/video/${videoId}`;
+        // fetching the video in Chunks of 1MB size
+        // Partial Content is returned by backend in response
+        const videoUrl = `http://localhost:8080/stream/video/range/${videoId}`;
+
+        // getting and streaming the whole video at once
+        // const videoUrl = `http://localhost:8080/stream/video/${videoId}`;
+
+        const securedSrc = `${videoUrl}?token=Bearer ${token}`;
+        videoRef.current.src = securedSrc;
 
         playerRef.current = videojs(videoRef.current, {
             controls: true,
             autoplay: true,
             muted: true,
             preload: "auto",
-        });
-
-        if (Hls.isSupported()) {
-            const hls = new Hls();
-            hls.loadSource(videoUrl);
-            hls.attachMedia(videoRef.current);
-            hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                videoRef.current.play();
-            });
-        } else if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
-            videoRef.current.src = videoUrl;
-            videoRef.current.addEventListener("canplay", () => {
-                videoRef.current.play();
-            });
-        } else {
-            console.log("Video format not supported");
-            toast.error("Video format not supported");
-        }
-
-        // Cleanup
-        return () => {
-            if (playerRef.current) {
-                playerRef.current.dispose();
-            }
-        };
-    }, [videoId]);
+        });        
+    }, []);
 
     return (
         <div>
