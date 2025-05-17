@@ -30,7 +30,7 @@ const UploadPage = () => {
     }
 
     const token = localStorage.getItem('token');
-    await axios.post('http://localhost:8080/admin/upload', formData, {
+    const response = await axios.post('http://localhost:8080/admin/upload', formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data'
@@ -45,8 +45,9 @@ const UploadPage = () => {
     setThumbnail(null);
     setThumbnailSource('');
 
-    const videoId = response.data.videoId;
-    navigate(`/video-player/${videoId}`);
+    const videoId = response.data;
+    // navigate(`/video-player/${videoId}`);
+    navigate(`/hls-video-player/${videoId}`);
   };
 
   const handleCaptureThumbnail = () => {

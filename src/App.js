@@ -6,6 +6,7 @@ import UploadPage from './components/UploadPage';
 import ProtectedLayout from './components/ProtectedLayout';
 import Footer from './components/Footer';
 import VideoPlayer from './components/VideoPlayer';
+import HLSVideoPlayer from './components/HLSVideoPlayer';
 
 function VideoPlayerWrapper() {
   const { id } = useParams();
@@ -28,6 +29,7 @@ function App() {
         <Route element={<ProtectedLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/video-player/:id" element={<VideoPlayerWrapper />} />
+          <Route path="/hls-video-player/:videoId" element={<HLSVideoPlayer />} />
 
           {/* Upload page - accessible only for admin */}
           <Route 
