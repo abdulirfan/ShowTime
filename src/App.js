@@ -1,13 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import Dashboard from './components/Dashboard';
 import UploadPage from './components/UploadPage';
 import ProtectedLayout from './components/ProtectedLayout';
 import Footer from './components/Footer';
 import VideoPlayer from './components/VideoPlayer';
-import StreamPage from './components/StreamPage';
-import VideoPlayerPage from './components/VideoPlayerPage';
+
+function VideoPlayerWrapper() {
+  const { id } = useParams();
+  return <VideoPlayer videoId={id} />;
+}
 
 function App() {
   const role = localStorage.getItem('role');
@@ -15,20 +18,27 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* Redirect root to login */}
         <Route path="/" element={<Navigate to="/login" />} />
+
+        {/* Public Route */}
         <Route path="/login" element={<LoginPage />} />
 
+        {/* Protected Routes */}
         <Route element={<ProtectedLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/video-player" element={<VideoPlayerPage />} />
-          <Route path="/video-player/:id" element={<VideoPlayer />} />
-          {/*<Route path="/upload" element={role === 'admin' ? <UploadPage /> : <Navigate to="/dashboard" />} />*/}
-          <Route path="/upload" element={<UploadPage />} />
-          <Route path="/video/:id" element={<VideoPlayer />} />
-          <Route path="/stream" element={<StreamPage />} />
+          <Route path="/video-player/:id" element={<VideoPlayerWrapper />} />
+
+          {/* Upload page - accessible only for admin */}
+          <Route 
+            path="/upload" 
+            element={role === 'ROLE_ADMIN' ? <UploadPage /> : <Navigate to="/dashboard" />} 
+          />
         </Route>
       </Routes>
-      <Footer/>
+
+      {/* Always visible Footer */}
+      <Footer />
     </Router>
   );
 }
